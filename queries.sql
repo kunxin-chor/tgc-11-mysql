@@ -1,4 +1,5 @@
 /* logging in */
+/* the root account has been created by default */
 mysql -u root
 
 /* see all databases */
@@ -25,5 +26,9 @@ create table Parents (
 insert into Parents (surname, given_name, email)
     values ('Phua', 'Chua Kang', 'chukang@phua.com.sg');
 
+insert into Parents (surname, given_name, email)
+ values ('Lim', 'Megan', 'meganlim@fake.com.sg');
+
 /* see all the rows in a table */
 select * from Parents;
+
