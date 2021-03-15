@@ -106,5 +106,5 @@ alter table Students rename column given_name to first_name;
 /* modify the definition of a column */
 alter table Students modify gender varchar(1);
 
-/* assume we have a table named `Fake` */
+/* assume we have a table named `Fake` and we want to drop it */
 drop table Fake;
