@@ -73,3 +73,38 @@ insert into Students (surname, given_name, date_of_birth, parent_id)
 
 insert into Students (surname, given_name, date_of_birth, parent_id)
    values ('Lim', 'Mary', '1999-06-21', 5);
+
+insert into Students (surname, given_name, date_of_birth, parent_id)
+   values ('Sue', 'Mary', '1999-06-21', 100);
+
+create table Sessions (
+    session_id int unsigned auto_increment primary key,
+    session_date datetime not null,
+    venue_id tinyint unsigned,
+    foreign key(venue_id) references Venues(venue_id) on delete cascade
+) engine=innodb;
+
+create table CertificateStudent (
+    certificate_student_id int unsigned auto_increment primary key,
+    student_id int unsigned,
+    certificate_id int unsigned,
+    award_date date not null,
+    foreign key (student_id) references Students(student_id),
+    foreign key (certificate_id) references Certificates(certificate_id)
+) engine = innodb;
+
+insert into CertificateStudent (student_id, certificate_id, award_date)
+  values (2, 1, '2021-01-21');
+
+/* add a new column to an existing table */
+alter table Students add gender varchar(1) not null;
+
+/* rename a column */
+alter table Students rename column surname to last_name;
+alter table Students rename column given_name to first_name;
+
+/* modify the definition of a column */
+alter table Students modify gender varchar(1);
+
+/* assume we have a table named `Fake` */
+drop table Fake;
