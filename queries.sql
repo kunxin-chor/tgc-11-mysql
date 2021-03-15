@@ -56,3 +56,20 @@ insert into Venues (`name`, address) values
 
 
 describe venues; 
+
+/* Foreign keys */
+
+create table Students (
+    student_id int unsigned auto_increment primary key,
+    surname varchar(100) not null,
+    given_name varchar(100) not null,
+    date_of_birth date not null,
+    parent_id int unsigned not null,
+    foreign key(parent_id) references Parents(parent_id)
+) engine=innodb;
+
+insert into Students (surname, given_name, date_of_birth, parent_id)
+   values ('Phua', 'Anthony', '1990-06-21', 1);
+
+insert into Students (surname, given_name, date_of_birth, parent_id)
+   values ('Lim', 'Mary', '1999-06-21', 5);
