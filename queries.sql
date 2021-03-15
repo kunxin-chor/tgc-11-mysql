@@ -119,3 +119,17 @@ update Students set first_name = "Susan" where student_id = 2;
 
 /* the following will not work because of foreign key constraints */
 update Students set parent_id = 100 where student_id = 2;
+
+/* Add in a foreign key after a table has been created */
+create table Coaches(
+    coach_id tinyint unsigned auto_increment primary key,
+    `name` varchar(100) not null
+) engine=innodb;
+
+
+/* 1. add in the new column to the Sessions table */
+alter table Sessions add coach_id tinyint unsigned not null;
+
+/* 2. add in foreign key definition */
+alter table Sessions add foreign key(coach_id) 
+    references Coaches(coach_id);
