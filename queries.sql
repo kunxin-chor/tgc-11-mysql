@@ -108,3 +108,11 @@ alter table Students modify gender varchar(1);
 
 /* assume we have a table named `Fake` and we want to drop it */
 drop table Fake;
+
+/* to create a new row, we use insert */
+
+/* to delete a row, we use DELETE FROM */
+delete from Parents where parent_id = 3;
+
+/* to modify a row, we use UPDATE */
+update Students set first_name = "Susan" where student_id = 2
