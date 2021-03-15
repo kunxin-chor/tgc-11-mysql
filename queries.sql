@@ -115,4 +115,7 @@ drop table Fake;
 delete from Parents where parent_id = 3;
 
 /* to modify a row, we use UPDATE */
-update Students set first_name = "Susan" where student_id = 2
+update Students set first_name = "Susan" where student_id = 2;
+
+/* the following will not work because of foreign key constraints */
+update Students set parent_id = 100 where student_id = 2;
