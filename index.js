@@ -20,22 +20,40 @@ async function main() {
         'database': 'sakila'
     });
 
-    // let query = "SELECT * FROM actors";
-    // // the syntax below is known as ARRAY DESTRUCTURING
-    // let [actors] = await connection.execute("SELECT * FROM actor");
-    // // instead of
-    // // let response = await connection.execute("SELECT * FROM actor");
-    // // let actors = response[0];
-    // // for (let a of actors) {
-    // //     console.log(a);
-    // // }
-    // console.log(actors.toJSON())
-
     app.get('/actors', async (req,res)=>{
         let [actors] = await connection.execute("SELECT * FROM actor");
         res.render('actors', {
             'actors': actors
         })
+    })
+
+    app.get('/actors/create', async(req,res)=>{
+        res.render('actor_create');
+    })
+
+    app.post('/actors/create', async(req,res)=>{
+        let {first_name, last_name} = req.body;
+        // instead of:
+        // let first_name = req.body.first_name;
+        // let last_name = req.body.last_name;
+
+        // use prepared statements to insert the actor
+        let query = `insert into actor (first_name, last_name) VALUES (?,?)`;
+        await connection.execute(query, [first_name, last_name]);
+        res.redirect('/actors')
+    })
+
+    app.get('/actors/:actor_id/update', async(req,res)=>{
+        // 1. retrieve the actor that we want to update
+        let query = "SELECT * FROM actor WHERE actor_id = ?";
+        let [actors] = await connection.execute(query, [req.params.actor_id]);
+        let actor = actors[0];
+
+        // 2. render out the form with the actor's data prefilled in
+        res.render('actor_update',{
+            'actor': actor
+        })
+
     })
 }
 
