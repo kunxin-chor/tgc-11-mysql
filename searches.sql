@@ -87,3 +87,75 @@ officeCode in (1,2,3);
 /* 6.  Show the name of the product, together with the order details,  for each order line from the orderdetails table */
 SELECT orderdetails.orderNumber, products.productCode, products.productName FROM orderdetails 
 join products on orderdetails.productCode = products.productCode
+
+/** DATES **/
+
+/* show all the orders made on 2003-01-09 */
+select * from orders where orderDate='2003-01-09';
+
+/* extract out the year,month and day components of a date */
+select orderNumber, YEAR(orderDate), MONTH(orderDate), DAY(orderDate) from orders;
+
+/* find all the orders made in the year 2003 */
+select orderNumber, orderDate from orders where YEAR(orderDate) = 2003;
+select orderNumber, orderDate from orders where orderDate >= '2003-01-01' and orderDate <= '2003-31-12';
+
+/* find all the orders made in the year 2003 and in the month of feb */
+select orderNumber, orderDate from orders where YEAR(orderDate) = '2003' AND MONTH(orderDate) = '2';
+
+/* find all the orders that are required to ship in 3 days time */
+select * from orders where requiredDate - CURDATE() = 3;
+
+/* find all the orders that has shipped within 3 days ago */
+select * from orders where CURDATE() - shippedDate < 3;
+
+/* AGGREGATION */
+/* aka Reducing */
+
+/* Count how many orders there are */
+select count(*) from orders;
+
+/* Sum up the creditLimit for all customers */
+SELECT sum(creditLimit) FROM customers;
+
+/* Find the average credit limit */
+select avg(creditLimit) FROM customers;
+
+/* Find the average credit limit for all customers from USA */
+SELECT avg(creditLimit) FROM customers WHERE country="USA";
+
+/* Find the MAX credit limit among all the customers from USA */
+SELECT max(creditLimit) FROM customers WHERE country="USA"
+
+/* Find the MIN credit limit among all the customers from USA */
+SELECT min(creditLimit) FROM customers WHERE country="USA"
+
+/* Show the countries where we have customers */
+SELECT distinct(country) from customers;
+
+/* Show the average credit limit for each country */
+SELECT avg(creditLimit), country FROM customers
+GROUP BY country
+
+/* Count all the employees in each office */
+SELECT offices.officeCode, city, count(*) AS "employee_count" FROM employees
+JOIN offices on employees.officeCode = offices.officeCode
+GROUP BY officeCode, city
+
+/* Count all the SALES REP in each office */
+SELECT offices.officeCode, city, count(*) AS "employee_count" FROM employees
+JOIN offices on employees.officeCode = offices.officeCode
+WHERE jobTitle = "Sales Rep"
+GROUP BY officeCode, city
+
+/* Only show the office where they have more than 2 sales rep */
+SELECT offices.officeCode, city, count(*) AS "employee_count" FROM employees
+JOIN offices on employees.officeCode = offices.officeCode
+WHERE jobTitle = "Sales Rep"
+GROUP BY officeCode, city
+HAVING count(*) > 2
+ORDER BY count(*)
+
+
+/* SUB QUERIES */
+/* find all customers whose credit limit is above the average credit limit */
