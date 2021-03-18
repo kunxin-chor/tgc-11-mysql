@@ -55,6 +55,16 @@ async function main() {
         })
 
     })
+
+    app.post('/actors/:actor_id/update', async(req,res)=>{
+        //1 .read in the new first name and last name
+        let {first_name, last_name} = req.body;
+
+        const query = "UPDATE actor SET first_name=?, last_name = ? where actor_id = ?";
+        await connection.execute(query, [first_name, last_name, req.params.actor_id]);
+        res.redirect('/actors');
+
+    })
 }
 
 main();
