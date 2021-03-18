@@ -1,0 +1,17 @@
+{{#extends 'base'}}
+
+{{#block 'content'}}
+<h1>Deleting {{actor.first_name}} {{actor.last_name}}</h1>
+<form method="POST">
+<div class="alert alert-danger">
+    <p>
+        Are you sure you want to delete {{actor.first_name}} {{actor.last_name}}?
+    </p>
+    <input type="submit" value="Yes" class="btn btn-danger"/>
+    <a href="/actors" class="btn btn-success">No</a>
+</div>
+
+</form>
+{{/block}}
+
+{{/extends}}

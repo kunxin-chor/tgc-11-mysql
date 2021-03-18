@@ -65,6 +65,23 @@ async function main() {
         res.redirect('/actors');
 
     })
+
+    app.get('/actors/:actor_id/delete', async(req,res)=>{
+        let query = "SELECT * FROM actor WHERE actor_id = ?";
+        let [actors] = await connection.execute(query, [req.params.actor_id]);
+        let actor = actors[0];
+
+        res.render('actor_delete',{
+            'actor': actor
+        })
+
+    })
+    
+    app.post('/actors/:actor_id/delete', async(req,res)=>{
+        let query = "DELETE FROM actor WHERE actor_id = ?";
+        await connection.execute(query, [req.params.actor_id]);
+        res.redirect('/actors')
+    })
 }
 
 main();
