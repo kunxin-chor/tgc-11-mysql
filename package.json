@@ -1,0 +1,26 @@
+{
+  "name": "tgc-11-mysql",
+  "version": "1.0.0",
+  "description": "![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunxin-chor/tgc-11-mysql.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kunxin-chor/tgc-11-mysql/issues"
+  },
+  "homepage": "https://github.com/kunxin-chor/tgc-11-mysql#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "handlebars-helpers": "^0.10.0",
+    "hbs": "^4.1.1",
+    "mysql2": "^2.2.5",
+    "wax-on": "^1.2.2"
+  }
+}
